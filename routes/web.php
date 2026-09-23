@@ -7,7 +7,8 @@ Route::get('/', function () {
 });
 
 Route::get('/formulario', function () {
-    return view('formulario');
+    return view('formulario.index');
 });
 
-
+Route::get('/formulario', function () {
+    return view('formulario.create');
