@@ -12,3 +12,4 @@ Route::get('/formulario', function () {
 
 Route::get('/formulario', function () {
     return view('formulario.create');
+});
