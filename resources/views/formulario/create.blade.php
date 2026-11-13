@@ -1,92 +1,116 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Registro de perfil</title>
+    <title>Registro de usuario</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
+            background: #f3f4f6;
             margin: 0;
+            padding: 30px;
         }
 
         .contenedor {
-            width: 420px;
-            margin: 50px auto;
-            background-color: white;
+            max-width: 420px;
+            margin: auto;
+            background: white;
             padding: 30px;
-            border: 1px solid #ddd;
             border-radius: 8px;
         }
 
-        h1 {
-            color: #345995;
-            margin-top: 0;
-        }
+        h1 { color: #345995; }
 
         label {
             display: block;
             margin-top: 15px;
-            margin-bottom: 5px;
         }
 
-        input,
-        textarea {
+        input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #bbb;
-            border-radius: 4px;
             box-sizing: border-box;
-        }
-
-        textarea {
-            height: 80px;
-            resize: vertical;
+            margin-top: 5px;
         }
 
         button {
             margin-top: 20px;
             padding: 11px 20px;
-            background-color: #345995;
+            background: #345995;
             color: white;
-            border: none;
-            border-radius: 5px;
+            border: 0;
             cursor: pointer;
         }
 
-        a {
-            display: inline-block;
-            margin-left: 15px;
-            color: #555;
-        }
+        .error { color: red; }
+        .mensaje { color: green; }
     </style>
 </head>
 
 <body>
-    <div class="contenedor">
-        <h1>Crear perfil</h1>
+<div class="contenedor">
 
-        <p>Ingresa la información solicitada para crear tu perfil.</p>
+    <h1>Crear usuario</h1>
 
-        <form action="#" method="GET">
-            <label for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" name="nombre" required>
+    @if ($errors->any())
+        <div class="error">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-            <label for="correo">Correo electrónico</label>
-            <input type="email" id="correo" name="correo" required>
+    <form action="{{ route('registro.store') }}" method="POST">
+        @csrf
 
-            <label for="edad">Edad</label>
-            <input type="number" id="edad" name="edad" min="18" required>
+        <label for="name">Nombre completo</label>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            value="{{ old('name') }}"
+            required
+        >
 
-            <label for="intereses">Intereses</label>
-            <textarea id="intereses" name="intereses"></textarea>
+        <label for="email">Correo electrónico</label>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            value="{{ old('email') }}"
+            required
+        >
 
-            <button type="submit">Crear perfil</button>
-            <a href="/">Regresar</a>
-        </form>
-    </div>
+        <label for="password">Contraseña</label>
+        <input
+            type="password"
+            id="password"
+            name="password"
+            required
+        >
+
+        <label for="password_confirmation">
+            Confirmar contraseña
+        </label>
+        <input
+            type="password"
+            id="password_confirmation"
+            name="password_confirmation"
+            required
+        >
+
+        <button type="submit">Registrarme</button>
+
+        <p>
+            <a href="{{ route('inicio') }}">Regresar al inicio</a>
+        </p>
+    </form>
+
+</div>
 </body>
 </html>
