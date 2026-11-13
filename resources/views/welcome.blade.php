@@ -125,12 +125,12 @@
     <header>
         <h1>Sistema de Citas</h1>
 
-        <nav>
-            <a href="/">Inicio</a>
-            <a href="#">Perfiles</a>
-            <a href="#">Citas</a>
-            <a href="#">Iniciar sesión</a>
-        </nav>
+<nav>
+    <a href="{{ route('inicio') }}">Inicio</a>
+    <a href="{{ route('registro.create') }}">Registrar usuario</a>
+    <a href="{{ route('perfiles.index') }}">Ver usuarios</a>
+</nav>
+
     </header>
 
     <main class="contenido">
@@ -142,7 +142,7 @@
                 y administrar solicitudes de citas desde un mismo lugar.
             </p>
 
-            <a href="#" class="boton">Comenzar</a>
+            <a href="{{ route('registro.create') }}" class="boton">Comenzar</a>
         </section>
 
         <section class="opciones">
