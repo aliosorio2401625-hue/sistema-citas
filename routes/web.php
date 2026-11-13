@@ -1,25 +1,26 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/formulario', function () {
-    return view('formulario.index');
-});
-
-Route::get('/formulario', function () {
-    return view('formulario.create');
-});
-
-
 use App\Http\Controllers\RegistroController;
 
+// Página principal
+Route::get('/', function () {
+    return view('welcome');
+})->name('inicio');
+
+// Mostrar formulario de registro
 Route::get('/registro', [RegistroController::class, 'create'])
     ->name('registro.create');
 
+// Guardar usuario
 Route::post('/registro', [RegistroController::class, 'store'])
     ->name('registro.store');
+
+// Mostrar usuarios registrados
+Route::get('/perfiles', [RegistroController::class, 'index'])
+    ->name('perfiles.index');
+
+
+    
     
