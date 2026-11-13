@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Http\Controllers;
@@ -8,13 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    // Mostrar formulario de inicio de sesión
     public function create()
     {
         return view('auth.login');
     }
 
-    // Comprobar los datos del usuario
     public function store(Request $request)
     {
         $credenciales = $request->validate([
@@ -23,8 +20,6 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credenciales)) {
-
-            // Regenerar la sesión por seguridad
             $request->session()->regenerate();
 
             return redirect()->route('inicio')
@@ -38,7 +33,6 @@ class LoginController extends Controller
             ->onlyInput('email');
     }
 
-    // Cerrar sesión
     public function destroy(Request $request)
     {
         Auth::logout();
@@ -50,4 +44,3 @@ class LoginController extends Controller
             ->with('success', 'Has cerrado sesión correctamente.');
     }
 }
-

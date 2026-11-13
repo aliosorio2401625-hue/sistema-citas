@@ -28,10 +28,28 @@
             font-size: 22px;
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         nav a {
             color: white;
             text-decoration: none;
-            margin-left: 20px;
+        }
+
+        nav span {
+            color: white;
+        }
+
+        nav button {
+            padding: 8px 12px;
+            background-color: white;
+            color: #345995;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         .contenido {
@@ -104,10 +122,8 @@
 
             nav {
                 margin-top: 15px;
-            }
-
-            nav a {
-                margin: 0 8px;
+                justify-content: center;
+                flex-wrap: wrap;
             }
 
             .opciones {
@@ -125,15 +141,31 @@
     <header>
         <h1>Sistema de Citas</h1>
 
-<nav>
-    <a href="{{ route('inicio') }}">Inicio</a>
-    <a href="{{ route('registro.create') }}">Registrar usuario</a>
-    <a href="{{ route('perfiles.index') }}">Ver usuarios</a>
-</nav>
+        <nav>
+            <a href="{{ route('inicio') }}">Inicio</a>
 
+            @auth
+                <span>Hola, {{ Auth::user()->name }}</span>
+
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit">Cerrar sesión</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}">Iniciar sesión</a>
+                <a href="{{ route('registro.create') }}">Registrarse</a>
+            @endauth
+        </nav>
     </header>
 
     <main class="contenido">
+
+        @if (session('success'))
+            <p style="color: green; text-align: center;">
+                {{ session('success') }}
+            </p>
+        @endif
+
         <section class="bienvenida">
             <h2>Bienvenido</h2>
 
@@ -142,7 +174,13 @@
                 y administrar solicitudes de citas desde un mismo lugar.
             </p>
 
-            <a href="{{ route('registro.create') }}" class="boton">Comenzar</a>
+            @guest
+                <a href="{{ route('registro.create') }}" class="boton">
+                    Comenzar
+                </a>
+            @else
+                <p>Ya has iniciado sesión. Puedes continuar utilizando el sistema.</p>
+            @endguest
         </section>
 
         <section class="opciones">
