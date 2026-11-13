@@ -13,3 +13,13 @@ Route::get('/formulario', function () {
 Route::get('/formulario', function () {
     return view('formulario.create');
 });
+
+
+use App\Http\Controllers\RegistroController;
+
+Route::get('/registro', [RegistroController::class, 'create'])
+    ->name('registro.create');
+
+Route::post('/registro', [RegistroController::class, 'store'])
+    ->name('registro.store');
+    
