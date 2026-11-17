@@ -138,6 +138,7 @@
 </head>
 
 <body>
+
     <header>
         <h1>Sistema de Citas</h1>
 
@@ -147,10 +148,17 @@
             @auth
                 <span>Hola, {{ Auth::user()->name }}</span>
 
+                @if (Auth::user()->profile)
+                    <a href="{{ route('perfil.edit') }}">Editar mi perfil</a>
+                @else
+                    <a href="{{ route('perfil.create') }}">Completar mi perfil</a>
+                @endif
+
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit">Cerrar sesión</button>
                 </form>
+
             @else
                 <a href="{{ route('login') }}">Iniciar sesión</a>
                 <a href="{{ route('registro.create') }}">Registrarse</a>
@@ -184,25 +192,75 @@
         </section>
 
         <section class="opciones">
+
             <div class="opcion">
                 <h3>Crear perfil</h3>
-                <p>Registra tus datos personales y agrega información sobre tus intereses.</p>
+
+                <p>
+                    Registra tus datos personales y agrega información
+                    sobre tus intereses.
+                </p>
+
+                @auth
+                    @if (Auth::user()->profile)
+                        <a href="{{ route('perfil.edit') }}" class="boton">
+                            Editar perfil
+                        </a>
+                    @else
+                        <a href="{{ route('perfil.create') }}" class="boton">
+                            Crear perfil
+                        </a>
+                    @endif
+                @else
+                    <a href="{{ route('login') }}" class="boton">
+                        Iniciar sesión
+                    </a>
+                @endauth
             </div>
 
             <div class="opcion">
                 <h3>Ver perfiles</h3>
-                <p>Consulta la información de otros usuarios registrados en el sistema.</p>
+
+                <p>
+                    Consulta la información de otros usuarios
+                    registrados en el sistema.
+                </p>
+
+                @auth
+                    <a href="{{ route('perfiles.index') }}" class="boton">
+                        Ver perfiles
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="boton">
+                        Iniciar sesión
+                    </a>
+                @endauth
             </div>
 
             <div class="opcion">
                 <h3>Mis citas</h3>
-                <p>Revisa y administra las solicitudes de citas recibidas o enviadas.</p>
+
+                <p>
+                    Revisa y administra las solicitudes de citas
+                    recibidas o enviadas.
+                </p>
+
+                @auth
+                    <span>Próximamente</span>
+                @else
+                    <a href="{{ route('login') }}" class="boton">
+                        Iniciar sesión
+                    </a>
+                @endauth
             </div>
+
         </section>
+
     </main>
 
     <footer>
         Proyecto de Programación Web — 2026
     </footer>
+
 </body>
 </html>

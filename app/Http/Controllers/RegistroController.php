@@ -33,11 +33,12 @@ class RegistroController extends Controller
             ->with('success', 'Usuario registrado correctamente.');
     }
 
-    // Consultar los usuarios registrados
+    // Consultar los usuarios y sus perfiles
     public function index()
     {
-        $usuarios = User::latest()->get();
+        $usuarios = User::with('profile')->latest()->get();
 
         return view('formulario.index', compact('usuarios'));
     }
 }
+
