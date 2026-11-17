@@ -53,7 +53,7 @@
         }
 
         .contenido {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 50px auto;
             padding: 0 20px;
         }
@@ -87,14 +87,18 @@
             border-radius: 5px;
         }
 
+        .boton:hover {
+            background-color: #254575;
+        }
+
         .opciones {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 20px;
             margin-top: 25px;
         }
 
         .opcion {
-            flex: 1;
             background-color: white;
             padding: 22px;
             border: 1px solid #ddd;
@@ -126,12 +130,8 @@
                 flex-wrap: wrap;
             }
 
-            .opciones {
-                display: block;
-            }
-
-            .opcion {
-                margin-bottom: 15px;
+            .bienvenida {
+                padding: 25px;
             }
         }
     </style>
@@ -229,6 +229,25 @@
                 @auth
                     <a href="{{ route('perfiles.index') }}" class="boton">
                         Ver perfiles
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="boton">
+                        Iniciar sesión
+                    </a>
+                @endauth
+            </div>
+
+            <div class="opcion">
+                <h3>Descubrir personas</h3>
+
+                <p>
+                    Encuentra personas según tus preferencias
+                    y conoce usuarios con intereses similares.
+                </p>
+
+                @auth
+                    <a href="{{ route('descubrir.index') }}" class="boton">
+                        Descubrir personas
                     </a>
                 @else
                     <a href="{{ route('login') }}" class="boton">

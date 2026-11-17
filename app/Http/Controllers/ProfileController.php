@@ -15,18 +15,20 @@ class ProfileController extends Controller
 
     // Guardar perfil del usuario
     public function store(Request $request)
-    {
-        $datos = $request->validate([
-            'edad' => 'nullable|integer|min:1|max:120',
-            'descripcion' => 'nullable|string|max:1000',
-            'intereses' => 'nullable|string|max:1000',
-        ]);
+{
+    $datos = $request->validate([
+        'edad' => 'nullable|integer|min:1|max:120',
+        'genero' => 'nullable|in:hombre,mujer,otro',
+        'preferencia' => 'nullable|in:hombres,mujeres,ambos',
+        'descripcion' => 'nullable|string|max:1000',
+        'intereses' => 'nullable|string|max:1000',
+    ]);
 
-        Auth::user()->profile()->create($datos);
+    Auth::user()->profile()->create($datos);
 
-        return redirect()->route('inicio')
-            ->with('success', 'Tu perfil se ha creado correctamente.');
-    }
+    return redirect()->route('inicio')
+        ->with('success', 'Tu perfil se ha creado correctamente.');
+}
 
     // Mostrar formulario para editar perfil
     public function edit()
@@ -45,6 +47,8 @@ class ProfileController extends Controller
     {
         $datos = $request->validate([
             'edad' => 'nullable|integer|min:1|max:120',
+            'genero' => 'nullable|in:hombre,mujer,otro',
+            'preferencia' => 'nullable|in:hombres,mujeres,ambos',
             'descripcion' => 'nullable|string|max:1000',
             'intereses' => 'nullable|string|max:1000',
         ]);

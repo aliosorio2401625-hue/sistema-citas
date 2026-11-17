@@ -3,12 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DescubrirController;
 use App\Http\Controllers\LoginController;
 
 // Página principal
 Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
+
+// Rutas para descubrir personas
+Route::middleware('auth')->group(function () {
+    Route::get('/descubrir', [DescubrirController::class, 'index'])
+        ->name('descubrir.index');
+});
 
 // Rutas para gestionar perfiles
 Route::middleware('auth')->group(function () {

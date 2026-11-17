@@ -29,6 +29,32 @@
 
         <br><br>
 
+        <label for="genero">Mi género:</label>
+        <select name="genero" id="genero">
+            <option value="">Selecciona una opción</option>
+            <option value="hombre" {{ old('genero') == 'hombre' ? 'selected' : '' }}>Hombre</option>
+            <option value="mujer" {{ old('genero') == 'mujer' ? 'selected' : '' }}>Mujer</option>
+            <option value="otro" {{ old('genero') == 'otro' ? 'selected' : '' }}>Otro</option>
+        </select>
+        @error('genero')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
+
+        <br><br>
+
+        <label for="preferencia">¿A quién deseas conocer?</label>
+        <select name="preferencia" id="preferencia">
+            <option value="">Selecciona una opción</option>
+            <option value="hombres" {{ old('preferencia') == 'hombres' ? 'selected' : '' }}>Hombres</option>
+            <option value="mujeres" {{ old('preferencia') == 'mujeres' ? 'selected' : '' }}>Mujeres</option>
+            <option value="ambos" {{ old('preferencia') == 'ambos' ? 'selected' : '' }}>Ambos</option>
+        </select>
+        @error('preferencia')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
+
+        <br><br>
+
         <label for="descripcion">Descripción personal:</label><br>
         <textarea
             name="descripcion"

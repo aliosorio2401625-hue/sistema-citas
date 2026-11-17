@@ -15,7 +15,7 @@
         }
 
         .contenedor {
-            max-width: 1100px;
+            max-width: 1300px;
             margin: auto;
             background: white;
             padding: 25px;
@@ -67,7 +67,7 @@
             }
 
             table {
-                min-width: 850px;
+                min-width: 1100px;
             }
         }
     </style>
@@ -100,6 +100,8 @@
                 <th>Nombre</th>
                 <th>Correo electrónico</th>
                 <th>Edad</th>
+                <th>Género</th>
+                <th>Preferencia</th>
                 <th>Descripción</th>
                 <th>Intereses</th>
             </tr>
@@ -117,7 +119,18 @@
                     <td>{{ $usuario->email }}</td>
 
                     @if ($usuario->profile)
-                        <td>{{ $usuario->profile->edad ?? 'No especificada' }}</td>
+
+                        <td>
+                            {{ $usuario->profile->edad ?? 'No especificada' }}
+                        </td>
+
+                        <td>
+                            {{ $usuario->profile->genero ?? 'No especificado' }}
+                        </td>
+
+                        <td>
+                            {{ $usuario->profile->preferencia ?? 'No especificada' }}
+                        </td>
 
                         <td>
                             {{ $usuario->profile->descripcion ?? 'Sin descripción' }}
@@ -126,10 +139,13 @@
                         <td>
                             {{ $usuario->profile->intereses ?? 'Sin intereses registrados' }}
                         </td>
+
                     @else
-                        <td colspan="3" class="sin-perfil">
+
+                        <td colspan="5" class="sin-perfil">
                             Este usuario todavía no ha completado su perfil.
                         </td>
+
                     @endif
 
                 </tr>
@@ -137,7 +153,7 @@
             @empty
 
                 <tr>
-                    <td colspan="6">
+                    <td colspan="8">
                         Aún no hay usuarios registrados.
                     </td>
                 </tr>
@@ -151,4 +167,3 @@
 
 </body>
 </html>
-
